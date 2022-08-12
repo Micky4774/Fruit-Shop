@@ -1,12 +1,19 @@
+package com.micky4774.pruebaTecnica;
 
-public abstract class Product {
-	private String name;
-	private int price;
-	public String getName() {
-		return name;
+public class Product {
+	
+	
+	public Product() {
+		// TODO Auto-generated constructor stub
+		this.description = null;
+		this.price = 0;
+		this.setDiscount(new Discount());
 	}
-	public void setName(String name) {
-		this.name = name;
+	public String getDescription() {
+		return description;
+	}
+	public void setDescription(String description) {
+		this.description = description;
 	}
 	public int getPrice() {
 		return price;
@@ -14,5 +21,14 @@ public abstract class Product {
 	public void setPrice(int price) {
 		this.price = price;
 	}
-	
+	public Discount getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+	private String description;
+	private int price;
+	private Discount discount;
+
 }

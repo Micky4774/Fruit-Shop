@@ -1,61 +1,60 @@
-/**
- * 
- */
+package com.micky4774.pruebaTecnica;
 import java.io.File;
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
-import com.fasterxml.jackson.databind.ObjectMapper;// in play 2.3
-/**
- * @author migsa
- *
- */
-public class Shopping implements Discounts{
+public class Shopping{
+	public final static String inputFolder = "C:\\Users\\migsa\\Documents\\MyWorkspace\\prueba-tecnica\\target\\inputFolder";
+	public final static String outputFolder = "C:\\Users\\migsa\\Documents\\MyWorkspace\\prueba-tecnica\\target\\outputFolder";
+	public final static String dataStoreFolder = "C:\\Users\\migsa\\Documents\\MyWorkspace\\prueba-tecnica\\target\\dataSourceFolder";
+	
 
-	/**
-	 * @param args
-	 */
 	public static void main(String[] args) {
-		
-		// TODO Auto-generated method stub
-		try {
-			ObjectMapper mapper = new ObjectMapper();
-			JsonFactory f = new JsonFactory();
-		    
-		    JsonParser jsonDataStore = f.createJsonParser(new File("C:\\inputFolder\\jsonDataStore.json"));
-		    JsonParser jsonPurchase = f.createJsonParser(new File("C:\\inputFolder\\jsonPurchase.json"));
-			List<Product> products = mapper.readValue(jsonDataStore, new ArrayList<Product>(){});
-			List<Article> articles = mapper.readValue(jsonPurchase, new ArrayList<Article>(){});
-			
-			
-			/* 
-			 * 
-			 * remaining source code after applying discounts
-			 * and gettin Receipt with information which
-			 * must be parsed to a json file
-			 */
-			
-			
-			
-		} catch (JsonGenerationException e) {
-		    e.printStackTrace();
-		} catch (JsonMappingException e) {
-		    e.printStackTrace();
-		} catch (IOException e) {
-		    e.printStackTrace();
-		}
+		File inputDir = new File(inputFolder);
+		File dataStore = new File(dataStoreFolder);
+		ArrayList<Product> productsCatalog = processProductsCatalog(dataStore.listFiles());
+		ArrayList<Receipt> receiptsList = new ArrayList<Receipt>();
+		ArrayList<Purchase> pickingsList = processPurchaseFiles(inputDir.listFiles());
+		Iterator<Purchase> itPickings = pickingsList.iterator();
+		while(itPickings.hasNext()) {
+			receiptsList.add((itPickings.next()).applyDiscounts(productsCatalog));
+		} 
+		processReceipts(receiptsList);
 	}
 	
-	@Override
-	public Receipt productbyproduct(Discount discount, Receipt receipt, Purchase purchase) {
-		
+	private static ArrayList<Product> processProductsCatalog(File[] files) {
 		// TODO Auto-generated method stub
-		return receipt;
-	}
-	@Override
-	public Receipt deductionbypurchase(Discount discount, int purchase, Receipt receipt) {
-		// TODO Auto-generated method stub
-		return receipt;
+		JsonFromToJava jsonFromToJava = new JsonFromToJava();
+		ArrayList<Product> productsCatalog = null;
+        for (File file : files) {
+            productsCatalog = jsonFromToJava.deserializeProductsCatalog(file);
+        }
+        return productsCatalog;
 	}
 
+	private static void processReceipts(ArrayList<Receipt> receiptsList) {
+		// TODO Auto-generated method stub
+		
+		JsonFromToJava jsonFromToJava = new JsonFromToJava();
+		Iterator<Receipt> itReceipts = receiptsList.iterator();
+		ArrayList<File> outputFilesList = new ArrayList<File>();
+		while(itReceipts.hasNext()) {
+			jsonFromToJava.serialize(itReceipts.next());
+			
+        } 
+	}
+
+	private static ArrayList<Purchase> processPurchaseFiles(File[] files) {
+		
+		JsonFromToJava jsonFromToJava = new JsonFromToJava();
+		ArrayList<Purchase> pickingsList = new ArrayList<Purchase>();
+        for (File file : files) {
+            pickingsList.add((Purchase) jsonFromToJava.deserialize(file));
+        }
+        return pickingsList;
+    }
+	
+	
 }
+
+

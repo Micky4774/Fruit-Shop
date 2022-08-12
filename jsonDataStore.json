@@ -1,4 +1,27 @@
-{"products": { "product": [ {"name": "Pears", "price": "75"}, {"name": "Apples", "price": "90"}, {"name": "Oranges", "price": "100"} ] } }
-   
-
-
+{
+  "Products Catalog" : [ {
+    "description" : "Pear",
+    "price" : 75,
+    "discount" : {
+      "description" : "1EuroDeductionBy4EurosInPears",
+      "reason" : 4,
+      "advantage" : 1
+    }
+  }, {
+    "description" : "Apple",
+    "price" : 90,
+    "discount" : {
+      "description" : "3By2InApples",
+      "reason" : 2,
+      "advantage" : 3
+    }
+  }, {
+    "description" : "Orange",
+    "price" : 100,
+    "discount" : {
+      "description" : "1FreeOrangeBy2Pears",
+      "reason" : 2,
+      "advantage" : 1
+    }
+  } ]
+}

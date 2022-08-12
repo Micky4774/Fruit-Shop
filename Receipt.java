@@ -1,12 +1,12 @@
+package com.micky4774.pruebaTecnica;
 import java.util.ArrayList;
 
 public class Receipt {
-	private ArrayList<Product> products;
-	public ArrayList<Product> getProducts() {
-		return products;
+	public ArrayList<Article> getBasket() {
+		return basket;
 	}
-	public void setProducts(ArrayList<Product> products) {
-		this.products = products;
+	public void setBasket(ArrayList<Article> basket) {
+		this.basket = basket;
 	}
 	public ArrayList<Discount> getDiscounts() {
 		return discounts;
@@ -14,13 +14,13 @@ public class Receipt {
 	public void setDiscounts(ArrayList<Discount> discounts) {
 		this.discounts = discounts;
 	}
-	public int getInvoice() {
-		return Invoice;
+	public int getTotalPrice() {
+		return totalPrice;
 	}
-	public void setInvoice(int invoice) {
-		Invoice = invoice;
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
 	}
+	private ArrayList<Article> basket;
 	private ArrayList<Discount> discounts;
-	private int Invoice;
-	
+	private int totalPrice;
 }

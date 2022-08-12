@@ -1,0 +1,18 @@
+{
+  "Total Price" : 3445,
+  "Articles Purchase" : [ {
+    "description" : "Pear",
+    "quantity" : 3
+  }, {
+    "description" : "Orange",
+    "quantity" : 26
+  }, {
+    "description" : "Apple",
+    "quantity" : 12
+  } ],
+  "Discounts Purchase" : [ {
+    "description" : "3By2InApples"
+  }, {
+    "description" : "1FreeOrangeBy2Pears"
+  } ]
+}
