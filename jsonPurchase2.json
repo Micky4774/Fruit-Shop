@@ -1,0 +1,12 @@
+{
+  "Articles Purchase" : [ {
+    "description" : "Pear",
+    "quantity" : 9
+  }, {
+    "description" : "Orange",
+    "quantity" : 23
+  }, {
+    "description" : "Apple",
+    "quantity" : 17
+  } ]
+}

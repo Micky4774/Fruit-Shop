@@ -65,8 +65,10 @@ public class JsonFromToJava implements Serialization{
 				arrayDiscounts.add(discountNode);
 			}
 			objectNode.set("Discounts Purchase", arrayDiscounts);
+			Double randomDouble = new Double(Math.random());
+			String randomString = randomDouble.toString();
 			JsonFactory factory = new JsonFactory();
-			JsonGenerator generator = factory.createGenerator(new File(Shopping.outputFolder + "\\jsonReceipt.json"),JsonEncoding.UTF8);
+			JsonGenerator generator = factory.createGenerator(new File(Shopping.outputFolder + "\\jsonReceipt"+randomString+".json"),JsonEncoding.UTF8);
 			generator.useDefaultPrettyPrinter();
 			mapper.writeTree(generator, rootNode);
 			

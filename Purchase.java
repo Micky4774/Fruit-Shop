@@ -65,7 +65,7 @@ public class Purchase implements Discounts{
 	public Article discount_3By2InApples(Article article) {
 		// TODO Auto-generated method stub
 		int apples = article.getQuantity();
-		int apples_price = (int) (apples/3)*2*90;
+		int apples_price = (apples/3)*2*90 + (apples%3)*90;
 		article.setSubtotal(apples_price);
 		article.setDiscountFlag((apples/3)!=0);
 		article.setDiscountDescription("3By2InApples");
