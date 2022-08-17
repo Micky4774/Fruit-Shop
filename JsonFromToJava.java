@@ -1,6 +1,4 @@
 package com.micky4774.pruebaTecnica;
-import static java.lang.System.out;
-
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
@@ -78,7 +76,7 @@ public class JsonFromToJava implements Serialization{
 		}
 		
 	}
-	public Purchase deserialize(File input) {
+	public Purchase deserialize(File input, HashMap<String, Product> productsCatalog) {
 		
 		HashMap<String,Article> articlesMap = new HashMap<String,Article>();
 		ArrayList<Article> articlesList = new ArrayList<Article>();
@@ -88,10 +86,12 @@ public class JsonFromToJava implements Serialization{
 			JsonNode arrayArticles = rootNode.get("Articles Purchase");
 
 			for (int i = 0; i < arrayArticles.size(); i++){ 
-				Article article = new Article();
-				
 				JsonNode articleNode = arrayArticles.get(i);
-				article.setDescription(articleNode.get("description").textValue());
+				String description = articleNode.get("description").textValue();
+				Article article = new Article(productsCatalog.get(description));
+				
+				
+				article.setDescription(description);
 				article.setQuantity(articleNode.get("quantity").intValue());
 				articlesMap.put(articleNode.get("description").textValue(), article);
 				articlesList.add(article);
@@ -130,9 +130,10 @@ public class JsonFromToJava implements Serialization{
 		this.output = output;
 	}
 
-	public ArrayList<Product> deserializeProductsCatalog(File file) {
+	public HashMap<String, Product> deserializeProductsCatalog(File file) {
 		// TODO Auto-generated method stub
-		ArrayList<Product> products = new ArrayList<Product>();
+//		ArrayList<Product> productsList = new ArrayList<Product>();
+		HashMap<String, Product> productsMap = new HashMap<String, Product>();
 		ObjectMapper mapper = new ObjectMapper();
 		try {
 			JsonNode rootNode = mapper.readTree(file);
@@ -140,23 +141,26 @@ public class JsonFromToJava implements Serialization{
 
 			for (int i = 0; i < arrayProducts.size(); i++){ 
 				Product product = new Product();
+				
 				Discount discount = new Discount();
 				
 				JsonNode productNode = arrayProducts.get(i);
-				product.setDescription(productNode.get("description").textValue());
+				String description = productNode.get("description").textValue();
+				product.setDescription(description);
 				product.setPrice(productNode.get("price").intValue());
 				JsonNode discountNode = productNode.get("discount");
 				discount.setDescription(discountNode.get("description").textValue());
 				discount.setReason(discountNode.get("reason").intValue());
 				discount.setAdvantage(discountNode.get("advantage").intValue());
 				product.setDiscount(discount);
-				products.add(product);
+//				productsList.add(product);
+				productsMap.put(description, product);
 				
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		return products;
+		return productsMap;
 	}
 }

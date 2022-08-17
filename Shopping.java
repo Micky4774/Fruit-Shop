@@ -1,6 +1,7 @@
 package com.micky4774.pruebaTecnica;
 import java.io.File;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 
 public class Shopping{
@@ -12,9 +13,9 @@ public class Shopping{
 	public static void main(String[] args) {
 		File inputDir = new File(inputFolder);
 		File dataStore = new File(dataStoreFolder);
-		ArrayList<Product> productsCatalog = processProductsCatalog(dataStore.listFiles());
+		final HashMap<String, Product> productsCatalog = processProductsCatalog(dataStore.listFiles());
 		ArrayList<Receipt> receiptsList = new ArrayList<Receipt>();
-		ArrayList<Purchase> pickingsList = processPurchaseFiles(inputDir.listFiles());
+		ArrayList<Purchase> pickingsList = processPurchaseFiles(inputDir.listFiles(), productsCatalog);
 		Iterator<Purchase> itPickings = pickingsList.iterator();
 		while(itPickings.hasNext()) {
 			receiptsList.add((itPickings.next()).applyDiscounts(productsCatalog));
@@ -22,10 +23,10 @@ public class Shopping{
 		processReceipts(receiptsList);
 	}
 	
-	private static ArrayList<Product> processProductsCatalog(File[] files) {
+	private static HashMap<String, Product> processProductsCatalog(File[] files) {
 		// TODO Auto-generated method stub
 		JsonFromToJava jsonFromToJava = new JsonFromToJava();
-		ArrayList<Product> productsCatalog = null;
+		HashMap<String, Product> productsCatalog = null;
         for (File file : files) {
             productsCatalog = jsonFromToJava.deserializeProductsCatalog(file);
         }
@@ -37,19 +38,18 @@ public class Shopping{
 		
 		JsonFromToJava jsonFromToJava = new JsonFromToJava();
 		Iterator<Receipt> itReceipts = receiptsList.iterator();
-		ArrayList<File> outputFilesList = new ArrayList<File>();
 		while(itReceipts.hasNext()) {
 			jsonFromToJava.serialize(itReceipts.next());
 			
         } 
 	}
 
-	private static ArrayList<Purchase> processPurchaseFiles(File[] files) {
+	private static ArrayList<Purchase> processPurchaseFiles(File[] files, HashMap<String, Product> productsCatalog) {
 		
 		JsonFromToJava jsonFromToJava = new JsonFromToJava();
 		ArrayList<Purchase> pickingsList = new ArrayList<Purchase>();
         for (File file : files) {
-            pickingsList.add((Purchase) jsonFromToJava.deserialize(file));
+            pickingsList.add((Purchase) jsonFromToJava.deserialize(file, productsCatalog));
         }
         return pickingsList;
     }
