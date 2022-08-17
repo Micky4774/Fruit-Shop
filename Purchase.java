@@ -62,35 +62,7 @@ public class Purchase implements Discounts{
 		return receipt;
 		
 		
-		/*HashMap<String, Article> basket = this.basketMap;
-				
-//		3By2InApples: flag=(apples/3)!=0
-		basket.put("Apple", discount_3By2InApples(basket.get("Apple")));
-				
 		
-//		1EuroDeductionBy4EurosInPears: flag=((pears*75)/400)!=0
-		basket.put("Pear", discount_1EuroDeductionBy4EurosInPears(basket.get("Pear")));
-		
-		
-//		1FreeOrangeBy2Pears: flag=(pears/2)!=0
-		basket.put("Orange", discount_1FreeOrangeBy2Pears(basket.get("Orange"),basket.get("Pear")));
-				
-		ArrayList<Article> list = this.getBasketList();
-		list.get(1).setQuantity(basket.get("Orange").getQuantity());
-		int total_price = basket.get("Apple").getSubtotal() + basket.get("Pear").getSubtotal() + basket.get("Orange").getSubtotal();
-		Receipt receipt = new Receipt();
-		receipt.setBasket(list);
-		receipt.setTotalPrice(total_price);
-		ArrayList<Discount> discounts = new ArrayList<Discount>();
-		Iterator<Product> it = productsCatalog.iterator();
-		while(it.hasNext()) {
-			Product product = it.next();
-			if (basket.get(product.getDescription()).isDiscountFlag()) {
-				discounts.add(product.getDiscount());
-			}
-		}
-		receipt.setDiscounts(discounts);
-		return receipt;*/
 		
 	}
 	
