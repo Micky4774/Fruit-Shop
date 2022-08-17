@@ -90,7 +90,7 @@ public class Purchase implements Discounts{
 	public Article discount_3By2InApples(Article article, Product apple) {
 		// TODO Auto-generated method stub
 		int apples = article.getQuantity();
-		int apples_price = (apples/apple.getDiscount().getAdvantage())*apple.getDiscount().getReason()*apple.getPrice() + (apples%3)*apple.getPrice();
+		int apples_price = (apples/apple.getDiscount().getAdvantage())*apple.getDiscount().getReason()*apple.getPrice() + (apples%apple.getDiscount().getAdvantage())*apple.getPrice();
 		article.setSubtotal(apples_price);
 		article.setDiscountFlag((apples/apple.getDiscount().getAdvantage())!=0);
 		article.setProduct(apple);
