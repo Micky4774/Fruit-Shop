@@ -1,6 +1,2 @@
-# Prueba_tecnica
-Prueba técnica para Asaitec
 
-The purpose of this technical proof is the creation of an interface called Discounts as well as an abstract class called Discount which in turn is extended by every discount defined in the statement of this proof or exercise, moreover, I also define an abstract class called Product which in turn should have also been extended by every fruit of this shop, namely: pears, apples, oranges. The interface called Discounts define every discount in a generic way, so that it should have been implemented with all its details in order to apply the discounts defined in the statement at the Shopping class (main method).
-In order to adapt the implementation of all the source code to a scenario where we might have considered the shop established a connection with a client by a json file in which we define the articles basket to be bought...and in a similar way, we might have sent a response with a json file which provided the desired information, namely: the invoice with products, prices, total price and applied discounts.
-Lastly I import a library whose dependency should have been created by Gradle (build.gradle) or Maven (pom.xml), in order to serialize and deserialize the information exchanged with the client.
+This is an example whose purpose is to develop a fruit shop which exchanges information by Json files (what means we could be used as a model example of communication with a de facto standard between a client and a webservice).
